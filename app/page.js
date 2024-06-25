@@ -17,11 +17,38 @@ const DUMMY_DATA = [
   { id: 6, title: "Food", color: "#f0f", total: 1000 },
 ];
 export default function Home() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [showAddIncomeModal, setShowAddIncomeModal] = useState(false);
   return (
     <>
-      <Modal show={modalIsOpen} onClose={setModalIsOpen}>
-        <h3>hi</h3>
+      {/* Add income modal */}
+      <Modal show={showAddIncomeModal} onClose={setShowAddIncomeModal}>
+        <form action="" className="flex flex-col gap-4">
+          <div className="input-group">
+            <label htmlFor="amount">Income Amount</label>
+            <input
+              type="number"
+              min={1}
+              step={1}
+              placeholder="Enter income amount"
+              name="amount"
+              id="amount"
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              placeholder="Enter income description"
+              name="description"
+              id="description"
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Add entry
+          </button>
+        </form>
       </Modal>
       <main className="container max-w-2xl px-6 mx-auto">
         <section className="py-3">
@@ -29,15 +56,15 @@ export default function Home() {
           <h2 className="text-4xl font-bold">{currencyFormatter(10000)}</h2>
         </section>
         <section className="flex items-center gap-2 py-3">
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              setModalIsOpen(true);
-            }}
-          >
+          <button className="btn btn-primary" onClick={() => {}}>
             + Expenses
           </button>
-          <button className="btn btn-primary-outline">+ Income</button>
+          <button
+            className="btn btn-primary-outline"
+            onClick={() => setShowAddIncomeModal(true)}
+          >
+            + Income
+          </button>
         </section>
 
         {/* Expenses */}
